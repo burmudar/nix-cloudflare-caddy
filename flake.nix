@@ -24,58 +24,59 @@
     rec {
 
       # Provide some binary packages for selected system types.
-      packages = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-          caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
-            owner = "caddyserver";
-            repo = "caddy";
-            rev = "v2.6.4";
-            sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
-          };
-          cloudflareSrc = nixpkgsFor.${system}.fetchFromGitHub {
-            owner = "caddy-dns";
-            repo = "cloudflare";
-            rev = "ed330a8";
-            sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
-          };
-        in
-        rec {
-          cloudflare_caddy = pkgs.buildGoModule rec {
-            noCheck = true;
-            pname = "caddy";
-            version = "2.6.4";
-            subPackages = [ "caddy" ];
-            # in the Nix store.
-            src = caddySrc;
+      packages = forAllSystems
+        (system:
+          let
+            pkgs = nixpkgsFor.${system};
+            caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
+              owner = "caddyserver";
+              repo = "caddy";
+              rev = "v2.6.4";
+              sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
+            };
+          in
+          {
+            cloudflare_caddy = pkgs.buildGoModule rec {
+              noCheck = true;
+              pname = "cloudflare_caddy";
+              version = "2.6.4";
+              subPackages = [ "cmd/caddy" ];
+              src = caddySrc;
 
-            vendorSha256 = "sha256-toi6efYZobjDV3YPT9seE/WZAzNaxgb1ioVG4txcuXM=";
+              vendorHash = "";
 
-            checkPhase = ''
-           '';
-            preBuild = ''
-                         echo ${pkgs.go.src}
-                         mkdir -p caddy
-                         cat << EOF > caddy/main.go
-              package main
+              overrideModAttrs = (old: {
+                patches = [ ./0001-cloudflare.patch ];
+                postInstall = "cp go.sum go.mod $out/ && ls $out/";
+              });
 
-              import (
-                caddycmd "github.com/caddyserver/caddy/v2/cmd"
+              checkPhase = ''
+              '';
+              postConfigure = ''
+                cp vendor/go.sum ./
+                cp vendor/go.mod ./
+              '';
+              postPatch = ''
+                cat << EOF > cmd/caddy/main.go
+                package main
 
-                // plug in Caddy modules here
-                _ "github.com/caddy-dns/cloudflare"
-                _ "github.com/caddyserver/caddy/v2/modules/standard"
-              )
+                import (
+                  caddycmd "github.com/caddyserver/caddy/v2/cmd"
 
-              func main() {
-                caddycmd.Main()
-              }
-              EOF
-                          cd caddy && go mod init caddy && go mod tidy && cd -
-            '';
+                  // plug in Caddy modules here
+                  _ "github.com/caddy-dns/cloudflare"
+                  _ "github.com/caddyserver/caddy/v2/modules/standard"
+                )
 
-          };
-        });
+                func main() {
+                  caddycmd.Main()
+                }
+                EOF
+                cat cmd/caddy/main.go
+              '';
+
+            };
+          });
 
       # Add dependencies that are only needed for development
       devShells = forAllSystems (system:
