@@ -4,12 +4,12 @@ index 48fa149a..cf1c77f7 100644
 +++ b/cmd/caddy/main.go
 @@ -32,6 +32,7 @@ import (
  	caddycmd "github.com/caddyserver/caddy/v2/cmd"
-
+ 
  	// plug in Caddy modules here
 +	_ "github.com/caddy-dns/cloudflare"
  	_ "github.com/caddyserver/caddy/v2/modules/standard"
  )
-
+ 
 diff --git a/go.mod b/go.mod
 index eaff3a5b..1c117074 100644
 --- a/go.mod
@@ -23,14 +23,13 @@ index eaff3a5b..1c117074 100644
  	github.com/dustin/go-humanize v1.0.1
  	github.com/go-chi/chi v4.1.2+incompatible
 @@ -50,6 +51,7 @@ require (
-     github.com/golang/mock v1.6.0 // indirect
-     github.com/google/pprof v0.0.0-20210407192527-94a9f03dee38 // indirect
-     github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
-+    github.com/libdns/cloudflare v0.1.0 // indirect
-     github.com/onsi/ginkgo/v2 v2.2.0 // indirect
-     github.com/pmezard/go-difflib v1.0.0 // indirect
-     github.com/quic-go/qpack v0.4.0 // indirect
-
+ 	github.com/golang/mock v1.6.0 // indirect
+ 	github.com/google/pprof v0.0.0-20210407192527-94a9f03dee38 // indirect
+ 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
++	github.com/libdns/cloudflare v0.1.0 // indirect
+ 	github.com/onsi/ginkgo/v2 v2.2.0 // indirect
+ 	github.com/pmezard/go-difflib v1.0.0 // indirect
+ 	github.com/quic-go/qpack v0.4.0 // indirect
 diff --git a/go.sum b/go.sum
 index c19dec23..26c61843 100644
 --- a/go.sum
@@ -44,6 +43,13 @@ index c19dec23..26c61843 100644
  github.com/caddyserver/certmagic v0.17.2 h1:o30seC1T/dBqBCNNGNHWwj2i5/I/FMjBbTAhjADP3nE=
  github.com/caddyserver/certmagic v0.17.2/go.mod h1:ouWUuC490GOLJzkyN35eXfV8bSbwMwSf4bdhkIxtdQE=
  github.com/casbin/casbin/v2 v2.1.2/go.mod h1:YcPU1XXisHhLzuxH9coDNf2FbKpjGlbCg3n9yuLkIJQ=
+@@ -435,6 +437,9 @@ github.com/lib/pq v1.1.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+ github.com/lib/pq v1.2.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+ github.com/lib/pq v1.10.2 h1:AqzbZs4ZoCBp+GtejcpCpcxM3zlSMx29dXbUSeVtJb8=
+ github.com/lib/pq v1.10.2/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
 +github.com/libdns/cloudflare v0.1.0 h1:93WkJaGaiXCe353LHEP36kAWCUw0YjFqwhkBkU2/iic=
 +github.com/libdns/cloudflare v0.1.0/go.mod h1:a44IP6J1YH6nvcNl1PverfJviADgXUnsozR3a7vBKN8=
 +github.com/libdns/libdns v0.2.0/go.mod h1:yQCXzk1lEZmmCPa857bnk4TsOiqYasqpyOEeSObbb40=
+ github.com/libdns/libdns v0.2.1 h1:Wu59T7wSHRgtA0cfxC+n1c/e+O3upJGWytknkmFEDis=
+ github.com/libdns/libdns v0.2.1/go.mod h1:yQCXzk1lEZmmCPa857bnk4TsOiqYasqpyOEeSObbb40=
+ github.com/lightstep/lightstep-tracer-common/golang/gogo v0.0.0-20190605223551-bc2310a04743/go.mod h1:qklhhLq1aX+mtWk9cPHPzaBjWImj5ULL6C7HFJtXQMM=
