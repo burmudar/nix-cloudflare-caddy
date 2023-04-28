@@ -32,7 +32,7 @@
               owner = "caddyserver";
               repo = "caddy";
               rev = "v2.6.4";
-              sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
+              sha256 = "";
             };
           in
           {
@@ -43,7 +43,7 @@
               subPackages = [ "cmd/caddy" ];
               src = caddySrc;
 
-              vendorHash = "";
+              vendorHash = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
 
               overrideModAttrs = (old: {
                 patches = [ ./0001-cloudflare.patch ];
