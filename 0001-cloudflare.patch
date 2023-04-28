@@ -36,3 +36,6 @@ index c19dec23..26c61843 100644
  github.com/caddyserver/certmagic v0.17.2 h1:o30seC1T/dBqBCNNGNHWwj2i5/I/FMjBbTAhjADP3nE=
  github.com/caddyserver/certmagic v0.17.2/go.mod h1:ouWUuC490GOLJzkyN35eXfV8bSbwMwSf4bdhkIxtdQE=
  github.com/casbin/casbin/v2 v2.1.2/go.mod h1:YcPU1XXisHhLzuxH9coDNf2FbKpjGlbCg3n9yuLkIJQ=
++github.com/libdns/cloudflare v0.1.0 h1:93WkJaGaiXCe353LHEP36kAWCUw0YjFqwhkBkU2/iic=
++github.com/libdns/cloudflare v0.1.0/go.mod h1:a44IP6J1YH6nvcNl1PverfJviADgXUnsozR3a7vBKN8=
++github.com/libdns/libdns v0.2.0/go.mod h1:yQCXzk1lEZmmCPa857bnk4TsOiqYasqpyOEeSObbb40=
