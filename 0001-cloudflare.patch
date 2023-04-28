@@ -29,4 +29,3 @@ index eaff3a5b..1c117074 100644
  	github.com/onsi/ginkgo/v2 v2.2.0 // indirect
  	github.com/pmezard/go-difflib v1.0.0 // indirect
  	github.com/quic-go/qpack v0.4.0 // indirect
-+	github.com/libdns/cloudflare v0.1.0 // indirect
