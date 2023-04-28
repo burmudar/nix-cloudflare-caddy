@@ -47,34 +47,10 @@
 
               overrideModAttrs = (old: {
                 patches = [ ./0001-cloudflare.patch ];
-                postInstall = "cp go.sum go.mod $out/ && ls $out/";
               });
 
               checkPhase = ''
               '';
-              postConfigure = ''
-                cp vendor/go.sum ./
-                cp vendor/go.mod ./
-              '';
-              postPatch = ''
-                cat << EOF > cmd/caddy/main.go
-                package main
-
-                import (
-                  caddycmd "github.com/caddyserver/caddy/v2/cmd"
-
-                  // plug in Caddy modules here
-                  _ "github.com/caddy-dns/cloudflare"
-                  _ "github.com/caddyserver/caddy/v2/modules/standard"
-                )
-
-                func main() {
-                  caddycmd.Main()
-                }
-                EOF
-                cat cmd/caddy/main.go
-              '';
-
             };
           });
 
