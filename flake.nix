@@ -36,9 +36,9 @@
             };
           in
           {
-            cloudflare_caddy = pkgs.buildGoModule rec {
+            cloudflare-caddy = pkgs.buildGoModule rec {
               noCheck = true;
-              pname = "cloudflare_caddy";
+              pname = "cloudflare-caddy";
               version = "2.6.4";
               subPackages = [ "cmd/caddy" ];
               src = caddySrc;
@@ -69,7 +69,7 @@
       defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare_caddy);
 
       overlay.default = final: prev: {
-        cloudflare_caddy = self.defaultPackage;
+        cloudflare-caddy = self.defaultPackage;
       };
     };
 }
