@@ -67,5 +67,9 @@
       # flake provides only one package or there is a clear "main"
       # package.
       defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare_caddy);
+
+      overlay.default = final: prev: {
+        cloudflare_caddy = self.defaultPackage;
+      };
     };
 }
