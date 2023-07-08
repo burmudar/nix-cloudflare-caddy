@@ -66,7 +66,7 @@
       # The default package for 'nix build'. This makes sense if the
       # flake provides only one package or there is a clear "main"
       # package.
-      defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare_caddy);
+      defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare-caddy);
 
       overlay.default = final: prev: {
         cloudflare-caddy = self.defaultPackage;
