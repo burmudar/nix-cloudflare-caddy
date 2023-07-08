@@ -32,7 +32,7 @@
               owner = "caddyserver";
               repo = "caddy";
               rev = "v2.6.4";
-              sha256 = "";
+              sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
             };
           in
           {
@@ -42,12 +42,9 @@
               version = "2.6.4";
               subPackages = [ "cmd/caddy" ];
               src = caddySrc;
+              patches = [ ./0001-cloudflare.patch ];
 
-              vendorHash = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
-
-              overrideModAttrs = (old: {
-                patches = [ ./0001-cloudflare.patch ];
-              });
+              vendorSha256 = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
 
               checkPhase = ''
               '';
