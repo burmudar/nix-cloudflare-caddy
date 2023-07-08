@@ -68,8 +68,6 @@
       # package.
       defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare-caddy);
 
-      overlay.default = final: prev: {
-        cloudflare-caddy = self.defaultPackage;
+      overlay.default = self.overlays.default;
       };
-    };
 }
