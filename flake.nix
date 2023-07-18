@@ -39,13 +39,13 @@
             cloudflare-caddy = pkgs.buildGoModule rec {
               noCheck = true;
               pname = "cloudflare-caddy";
-              version = "2.6.4";
+              version = caddySrc.rev;
               subPackages = [ "cmd/caddy" ];
               src = caddySrc;
               patches = [ ./0001-cloudflare.patch ];
 
               ldflags = [
-              "-X github.com/caddyserver/caddy/v2.CustomVersion=v2.6.4-cloudflare"
+              "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
               ];
 
               vendorSha256 = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
