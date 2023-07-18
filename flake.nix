@@ -44,6 +44,10 @@
               src = caddySrc;
               patches = [ ./0001-cloudflare.patch ];
 
+              ldflags = [
+              "-X github.com/caddyserver/caddy/v2.CustomVersion=v2.6.4-cloudflare"
+              ];
+
               vendorSha256 = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
 
               checkPhase = ''
