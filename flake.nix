@@ -45,7 +45,7 @@
               patches = [ ./0001-cloudflare.patch ];
 
               ldflags = [
-              "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
+                "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
               ];
 
               vendorSha256 = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
@@ -63,7 +63,7 @@
         in
         {
           default = pkgs.mkShell {
-            buildInputs = baseDeps ++ [ packages.${system}.cloudflare ];
+            buildInputs = baseDeps ++ [ packages.${system}.cloudflare-caddy ];
           };
         });
 
@@ -72,6 +72,9 @@
       # package.
       defaultPackage = forAllSystems (system: self.packages.${system}.cloudflare-caddy);
 
-      overlay = self.overlays.default;
+      overlay = final: prev: {
+        cloudflare-caddy = self.packages.${final.system}.cloudflare-caddy;
       };
+      formatter = forAllSystems (system: nixpkgsFor.${system}.nixpkgs-fmt);
+    };
 }
