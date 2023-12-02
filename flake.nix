@@ -20,6 +20,8 @@
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
+      lib = nixpkgs.lib;
+
     in
     rec {
 
@@ -31,12 +33,12 @@
             caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
               owner = "caddyserver";
               repo = "caddy";
-              rev = "v2.6.4";
-              sha256 = "sha256-3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
+              rev = "v2.7.5";
+              sha256 = "sha256-0IZZ7mkEzZI2Y8ed//m0tbBQZ0YcCXA0/b10ntNIXUk=";
             };
           in
           {
-            cloudflare-caddy = pkgs.buildGoModule rec {
+            cloudflare-caddy = pkgs.buildGoModule {
               noCheck = true;
               pname = "cloudflare-caddy";
               version = caddySrc.rev;
@@ -50,7 +52,8 @@
                 "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
               ];
 
-              vendorSha256 = "sha256-BcUWQYf76vl7TSQKcTWnjOHPGnXkRV8x/XgFVb7E2Iw=";
+              # set to lib.fakeSha256 to get the new one
+              vendorSha256 = "sha256-epR9v8TO7sPs8aL8zHC2t8sH9Kt/NpBonkCKyUIpNUg=";
 
               checkPhase = ''
               '';

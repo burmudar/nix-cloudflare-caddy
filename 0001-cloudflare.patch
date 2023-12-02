@@ -11,42 +11,45 @@ index 48fa149a..cf1c77f7 100644
  )
  
 diff --git a/go.mod b/go.mod
-index eaff3a5b..4dbf3c39 100644
+index 0cb5c33d..c4fef20f 100644
 --- a/go.mod
 +++ b/go.mod
 @@ -7,6 +7,7 @@ require (
  	github.com/Masterminds/sprig/v3 v3.2.3
- 	github.com/alecthomas/chroma/v2 v2.5.0
+ 	github.com/alecthomas/chroma/v2 v2.9.1
  	github.com/aryann/difflib v0.0.0-20210328193216-ff5ff6dc229b
-+	github.com/caddy-dns/cloudflare v0.0.0-20230224210553-a9d3ae2690a1
- 	github.com/caddyserver/certmagic v0.17.2
++	github.com/caddy-dns/cloudflare v0.0.0-20231018222540-737bf003fe8a
+ 	github.com/caddyserver/certmagic v0.19.2
  	github.com/dustin/go-humanize v1.0.1
  	github.com/go-chi/chi v4.1.2+incompatible
-@@ -62,6 +63,7 @@ require (
- 	go.opentelemetry.io/contrib/propagators/jaeger v1.15.0 // indirect
- 	go.opentelemetry.io/contrib/propagators/ot v1.15.0 // indirect
- 	golang.org/x/exp v0.0.0-20221205204356-47842c84f3db // indirect
+@@ -55,6 +56,7 @@ require (
+ 	github.com/google/go-tspi v0.3.0 // indirect
+ 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
+ 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.2 // indirect
 +	github.com/libdns/cloudflare v0.1.0 // indirect
- )
- 
- require (
+ 	github.com/onsi/ginkgo/v2 v2.9.5 // indirect
+ 	github.com/pmezard/go-difflib v1.0.0 // indirect
+ 	github.com/quic-go/qpack v0.4.0 // indirect
 diff --git a/go.sum b/go.sum
-index c19dec23..bec83d92 100644
+index 666a1ce8..29ac6e11 100644
 --- a/go.sum
 +++ b/go.sum
-@@ -97,6 +97,8 @@ github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
+@@ -93,6 +93,8 @@ github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
  github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
  github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kBD4zp0CCIs=
  github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
-+github.com/caddy-dns/cloudflare v0.0.0-20230224210553-a9d3ae2690a1 h1:otPG5SrMCkdaRgzvODLdaehryPY1/KwM3WcsuiM6d98=
-+github.com/caddy-dns/cloudflare v0.0.0-20230224210553-a9d3ae2690a1/go.mod h1:UhfVfgX50SGxeGBKDNXBIbY9SFlLwdwOicwV1vVoYXU=
- github.com/caddyserver/certmagic v0.17.2 h1:o30seC1T/dBqBCNNGNHWwj2i5/I/FMjBbTAhjADP3nE=
- github.com/caddyserver/certmagic v0.17.2/go.mod h1:ouWUuC490GOLJzkyN35eXfV8bSbwMwSf4bdhkIxtdQE=
++github.com/caddy-dns/cloudflare v0.0.0-20231018222540-737bf003fe8a h1:TghfxV6nrEO53WZ5By5N/JnFA4ny5IQQddqHEeO1nzA=
++github.com/caddy-dns/cloudflare v0.0.0-20231018222540-737bf003fe8a/go.mod h1:iCoBSVv3UGrzTr4fKJuSGcOcg9D5i3+nOr7QTQgvK9s=
+ github.com/caddyserver/certmagic v0.19.2 h1:HZd1AKLx4592MalEGQS39DKs2ZOAJCEM/xYPMQ2/ui0=
+ github.com/caddyserver/certmagic v0.19.2/go.mod h1:fsL01NomQ6N+kE2j37ZCnig2MFosG+MIO4ztnmG/zz8=
  github.com/casbin/casbin/v2 v2.1.2/go.mod h1:YcPU1XXisHhLzuxH9coDNf2FbKpjGlbCg3n9yuLkIJQ=
-@@ -1171,3 +1173,6 @@ rsc.io/quote/v3 v3.1.0/go.mod h1:yEA65RcK8LyAZtP9Kv3t0HmxON59tX3rD+tICJqUlj0=
- rsc.io/sampler v1.3.0/go.mod h1:T1hPZKmBbMNahiBKFy5HrXp6adAjACjK9JXDnKaTXpA=
- sigs.k8s.io/yaml v1.1.0/go.mod h1:UJmg0vDUVViEyp3mgSv9WPwZCDxu4rQW1olrI1uml+o=
- sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0/go.mod h1:hI742Nqp5OhwiqlzhgfbWU4mW4yO10fP+LoT9WOswdU=
+@@ -436,6 +438,9 @@ github.com/lib/pq v1.1.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+ github.com/lib/pq v1.2.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+ github.com/lib/pq v1.10.2/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
+ github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
 +github.com/libdns/cloudflare v0.1.0 h1:93WkJaGaiXCe353LHEP36kAWCUw0YjFqwhkBkU2/iic=
 +github.com/libdns/cloudflare v0.1.0/go.mod h1:a44IP6J1YH6nvcNl1PverfJviADgXUnsozR3a7vBKN8=
 +github.com/libdns/libdns v0.2.0/go.mod h1:yQCXzk1lEZmmCPa857bnk4TsOiqYasqpyOEeSObbb40=
+ github.com/libdns/libdns v0.2.1 h1:Wu59T7wSHRgtA0cfxC+n1c/e+O3upJGWytknkmFEDis=
+ github.com/libdns/libdns v0.2.1/go.mod h1:yQCXzk1lEZmmCPa857bnk4TsOiqYasqpyOEeSObbb40=
+ github.com/lightstep/lightstep-tracer-common/golang/gogo v0.0.0-20190605223551-bc2310a04743/go.mod h1:qklhhLq1aX+mtWk9cPHPzaBjWImj5ULL6C7HFJtXQMM=
