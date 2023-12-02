@@ -44,6 +44,8 @@
               src = caddySrc;
               patches = [ ./0001-cloudflare.patch ];
 
+              buildInputs = [ pkgs.go_1_20 ];
+
               ldflags = [
                 "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
               ];
