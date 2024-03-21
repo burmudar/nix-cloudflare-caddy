@@ -1,16 +1,11 @@
 {
-  description = "xcaddy with cloudflare";
+  description = "Caddy server with cloudflare dns support";
 
   # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "github:NixOS/nixpkgs";
 
   outputs = { self, nixpkgs }:
     let
-
-      # to work with older version of flakes
-      lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
-
-
       # System types to support.
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 
@@ -19,8 +14,6 @@
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
-
-      lib = nixpkgs.lib;
 
     in
     rec {
@@ -33,8 +26,8 @@
             caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
               owner = "caddyserver";
               repo = "caddy";
-              rev = "v2.7.5";
-              sha256 = "sha256-0IZZ7mkEzZI2Y8ed//m0tbBQZ0YcCXA0/b10ntNIXUk=";
+              rev = "v2.7.6";
+              sha256 = "sha256-th0R3Q1nGT0q5PGOygtD1/CpJmrT5TYagrwQR4t/Fvg=" ;
             };
           in
           {
@@ -51,7 +44,8 @@
               ];
 
               # set to lib.fakeSha256 to get the new one
-              vendorSha256 = "sha256-epR9v8TO7sPs8aL8zHC2t8sH9Kt/NpBonkCKyUIpNUg=";
+              # vendorHash = "${lib.fakeSha256}";
+              vendorHash = "sha256-dnKAwOrQkICkUVsyWJO+o2N4HcImLaL+fPyq8hUd5/8=";
 
               checkPhase = ''
               '';
