@@ -23,32 +23,41 @@
         (system:
           let
             pkgs = nixpkgsFor.${system};
-            caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
-              owner = "caddyserver";
-              repo = "caddy";
-              rev = "v2.8.4";
-              sha256 = "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=" ;
-            };
+            # the following lines extracts the version number from the go.mod
+            lines = builtins.split "\n" (builtins.readFile ./caddy-src/go.mod);
+            firstOrNull = list: if builtins.isList list then builtins.elemAt list 0 else null;
+            # iterate over all the lines trying to match the regex. If the regex doesn't match it's null otherwise it gives a list back and we take the first element
+            # after the map, we filter out all nulls
+            result = builtins.filter (x: x != null) (
+              builtins.map
+                (
+                  l: if builtins.isList l then null else firstOrNull (builtins.match "\tgithub\.com\/caddyserver\/caddy\/v2[[:space:]]+(.*)$" l)
+                )
+                lines
+            );
+            # if our processing above resulted in at least one item in the list then we use that as the version, otherwise 'dev'
+            version = if builtins.length result == 0 then "dev" else builtins.elemAt result 0;
           in
           {
             cloudflare-caddy = pkgs.buildGoModule {
+              src = ./caddy-src;
               noCheck = true;
               pname = "cloudflare-caddy";
-              version = caddySrc.rev;
-              subPackages = [ "cmd/caddy" ];
-              src = caddySrc;
-              patches = [ ./0001-cloudflare.patch ];
+              version = version;
 
               ldflags = [
-                "-X github.com/caddyserver/caddy/v2.CustomVersion=${caddySrc.rev}-cloudflare"
+                "-X github.com/caddyserver/caddy/v2.CustomVersion=cloudflare"
               ];
 
               # set to lib.fakeSha256 to get the new one
               # vendorHash = "${lib.fakeSha256}";
-              vendorHash = "sha256-dnKAwOrQkICkUVsyWJO+o2N4HcImLaL+fPyq8hUd5/8=";
-
-              checkPhase = ''
-              '';
+              vendorHash = "sha256-dEuxEG6mW2V7iuSXvziR82bmF+Hwe6ePCfdNj5t3t4c=";
+              meta = {
+                description = "Caddy server with Cloudflare DNS support";
+                homepage = "https://github.com/caddyserver/caddy";
+                license = pkgs.lib.licenses.asl20;
+                maintainers = with pkgs.lib.maintainers; [ burmudar ];
+              };
             };
           });
 
@@ -56,7 +65,7 @@
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgsFor.${system};
-          baseDeps = with pkgs; [ go gopls gotools go-tools ];
+          baseDeps = with pkgs; [ go_1_23 gopls gotools go-tools ];
         in
         {
           default = pkgs.mkShell {
