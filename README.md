@@ -61,7 +61,8 @@ func main() {
 
 3. `cd cmd/caddy`
 
-> [!IMPORTANT] The following steps have to be executed in cmd/caddy.
+> [!IMPORTANT]
+> The following steps have to be executed in cmd/caddy.
 
 4. `go get github.com/caddy-dns/cloudflare`
 5. Check that we can build it with `go build .`
