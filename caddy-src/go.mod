@@ -1,4 +1,4 @@
-module cloudflare-caddy
+module caddy
 
 go 1.22.5
 

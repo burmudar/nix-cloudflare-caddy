@@ -57,6 +57,7 @@
                 homepage = "https://github.com/caddyserver/caddy";
                 license = pkgs.lib.licenses.asl20;
                 maintainers = with pkgs.lib.maintainers; [ burmudar ];
+                mainProgram = "caddy";
               };
             };
           });
