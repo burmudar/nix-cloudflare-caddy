@@ -26,8 +26,8 @@
             caddySrc = nixpkgsFor.${system}.fetchFromGitHub {
               owner = "caddyserver";
               repo = "caddy";
-              rev = "v2.7.6";
-              sha256 = "sha256-th0R3Q1nGT0q5PGOygtD1/CpJmrT5TYagrwQR4t/Fvg=" ;
+              rev = "v2.8.4";
+              sha256 = "sha256-CBfyqtWp3gYsYwaIxbfXO3AYaBiM7LutLC7uZgYXfkQ=" ;
             };
           in
           {
