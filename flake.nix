@@ -51,7 +51,7 @@
 
               # set to lib.fakeSha256 to get the new one
               # vendorHash = "${lib.fakeSha256}";
-              vendorHash = "sha256-dEuxEG6mW2V7iuSXvziR82bmF+Hwe6ePCfdNj5t3t4c=";
+              vendorHash = "sha256-8CpaXbWjngZqk3XHp8OKpJVz+V2iPRbW4lCSxfzXXIs=";
               meta = {
                 description = "Caddy server with Cloudflare DNS support";
                 homepage = "https://github.com/caddyserver/caddy";
